@@ -1,0 +1,24 @@
+{
+  "name": "lol-esports-scrape-scripts",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeithBrosch/lol-esports-scrape-scripts.git"
+  },
+  "author": "keith brosch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KeithBrosch/lol-esports-scrape-scripts/issues"
+  },
+  "homepage": "https://github.com/KeithBrosch/lol-esports-scrape-scripts#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "puppeteer": "^22.12.1"
+  }
+}

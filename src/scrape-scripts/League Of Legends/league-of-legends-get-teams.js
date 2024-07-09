@@ -16,7 +16,7 @@ export default async function getLoLTeams() {
   const leagueObjects = [];
   let currentLeagueIndex = 0;
 
-  (async () => {
+ 
     while (currentLeagueIndex < numLeagueElements - 1) {
 
       // get league info
@@ -79,7 +79,6 @@ export default async function getLoLTeams() {
   }
     await browser.close();
     console.log(JSON.stringify(leagueObjects, null, 2));
-  })();
 
   return leagueObjects; // todo:  wait on async function above to complete before returning
   } catch (error) {

@@ -1,21 +1,22 @@
 {
-  "name": "lol-esports-scrape-scripts",
+  "name": "revere-scrape-scripts",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scrape": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KeithBrosch/lol-esports-scrape-scripts.git"
+    "url": "git+https://github.com/KeithBrosch/revere-scrape-scripts.git"
   },
   "author": "keith brosch",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/KeithBrosch/lol-esports-scrape-scripts/issues"
+    "url": "https://github.com/KeithBrosch/revere-scrape-scripts/issues"
   },
-  "homepage": "https://github.com/KeithBrosch/lol-esports-scrape-scripts#readme",
+  "homepage": "https://github.com/KeithBrosch/revere-scrape-scripts#readme",
   "description": "",
   "dependencies": {
     "dotenv": "^16.4.5",

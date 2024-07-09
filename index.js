@@ -1,6 +1,6 @@
-import getLoLTeams from './src/scrape-scripts/lol-esports-get-teams.js';
+import scrapeStandings from './src/scrape-scripts/League Of Legends/league-of-legends-get-teams.js';
 
 (async () => {
-  const LoLTeams = await getLoLTeams();
-  console.log(LoLTeams);
+  const LoLLeagues = await scrapeStandings();
+  console.log("LoL Leagues: ", LoLLeagues);
 })()

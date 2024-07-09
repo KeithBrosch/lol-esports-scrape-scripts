@@ -17,7 +17,7 @@ export default async function getLoLTeams() {
   let currentLeagueIndex = 0;
 
   (async () => {
-    while (currentLeagueIndex < numLeagueElements) {
+    while (currentLeagueIndex < numLeagueElements - 1) {
 
       // get league info
       const currentLeagueElement = leagueElements[currentLeagueIndex];
@@ -54,7 +54,7 @@ export default async function getLoLTeams() {
       const teamObjects = [];
       let currentTeamIndex = 0;
 
-      while (currentTeamIndex < numTeamElements) {
+      while (currentTeamIndex < numTeamElements - 1) {
         const currentTeamElement = teamElements[currentTeamIndex];
         const teamHref = await page.evaluate(currentTeamElement => currentTeamElement.getAttribute('href'), currentTeamElement);
         const currentTeamInnerText = await page.evaluate(currentTeamElement => currentTeamElement.innerText, currentTeamElement);

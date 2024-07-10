@@ -2,9 +2,9 @@ import getLeagueTeams from './src/scrape-scripts/League Of Legends/league-of-leg
 import getValorantTeams from './src/scrape-scripts/Valorant/valorant-get-teams.js';
 
 (async () => {
-  // const LOL_LEAGUES = await getLeagueTeams();
-  // console.log("LoL Leagues: ", LOL_LEAGUES);
+  const LEAGUE_TEAMS = await getLeagueTeams();
+  console.log("League Teams: ", LEAGUE_TEAMS);
 
-  const VALORANT_LEAGUES = await getValorantTeams();
-  console.log("Valorant Teams: ", VALORANT_LEAGUES);
+  // const VALORANT_TEAMS = await getValorantTeams();
+  // console.log("Valorant Teams: ", VALORANT_TEAMS);
 })()

@@ -13,7 +13,7 @@ export default async function getLeagueTeams() {
   const leagueElements = await page.$$('li.league');
   const numLeagueElements = leagueElements.length;
 
-  const leagueObjects = [];
+  const leagueTeams = [];
   let currentLeagueIndex = 0;
 
  
@@ -23,7 +23,7 @@ export default async function getLeagueTeams() {
       const currentLeagueElement = leagueElements[currentLeagueIndex];
       const currentLeagueInnerText = await page.evaluate(currentLeagueElement => currentLeagueElement.innerText, currentLeagueElement);
       const splitLeagueInnerText = currentLeagueInnerText.split('\n') || currentLeagueInnerText;
-      const leagueName = splitLeagueInnerText[0];
+      const teamRegion = splitLeagueInnerText[0];
       const leagueRegion = splitLeagueInnerText[1];
 
       // if leagueRegion === "international", skip the league
@@ -60,9 +60,12 @@ export default async function getLeagueTeams() {
         const currentTeamInnerText = await page.evaluate(currentTeamElement => currentTeamElement.innerText, currentTeamElement);
         const splitTeamInnerText = currentTeamInnerText.split('\n');
         const teamName = splitTeamInnerText[1];
-        teamObjects.push({
+        const teamLogo = await page.evaluate(currentTeamElement => currentTeamElement.children[1].children[0].children[0].getAttribute('src'), currentTeamElement);
+        leagueTeams.push({
           teamId,
+          teamLogo,
           teamName,
+          teamRegion,
         })
         currentTeamIndex = currentTeamIndex + 1;
       }
@@ -71,16 +74,16 @@ export default async function getLeagueTeams() {
       // increment currentLeagueIndex
       currentLeagueIndex = currentLeagueIndex + 1;
 
-      leagueObjects.push({
-        leagueName,
-        leagueRegion,
-        teamObjects,
-      });
+      // leagueTeams.push({
+      //   teamRegion,
+      //   leagueRegion,
+      //   teamObjects,
+      // });
   }
     await browser.close();
-    console.log(JSON.stringify(leagueObjects, null, 2));
+    console.log(JSON.stringify(leagueTeams, null, 2));
 
-  return leagueObjects;
+  return leagueTeams;
   } catch (error) {
     console.log('Error in league-of-legends-get-teams scrape: ', error)
   }

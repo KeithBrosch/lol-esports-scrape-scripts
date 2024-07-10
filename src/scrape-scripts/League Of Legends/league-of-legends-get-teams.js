@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import puppeteer from 'puppeteer';
 
-export default async function getLoLTeams() {
+export default async function getLeagueTeams() {
 
   try {
     
@@ -56,12 +56,12 @@ export default async function getLoLTeams() {
 
       while (currentTeamIndex < numTeamElements - 1) {
         const currentTeamElement = teamElements[currentTeamIndex];
-        const teamHref = await page.evaluate(currentTeamElement => currentTeamElement.getAttribute('href'), currentTeamElement);
+        const teamId = await page.evaluate(currentTeamElement => currentTeamElement.getAttribute('href'), currentTeamElement);
         const currentTeamInnerText = await page.evaluate(currentTeamElement => currentTeamElement.innerText, currentTeamElement);
         const splitTeamInnerText = currentTeamInnerText.split('\n');
         const teamName = splitTeamInnerText[1];
         teamObjects.push({
-          teamHref,
+          teamId,
           teamName,
         })
         currentTeamIndex = currentTeamIndex + 1;
@@ -80,7 +80,7 @@ export default async function getLoLTeams() {
     await browser.close();
     console.log(JSON.stringify(leagueObjects, null, 2));
 
-  return leagueObjects; // todo:  wait on async function above to complete before returning
+  return leagueObjects;
   } catch (error) {
     console.log('Error in league-of-legends-get-teams scrape: ', error)
   }

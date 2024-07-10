@@ -1,11 +1,11 @@
 import 'dotenv/config';
 import puppeteer from 'puppeteer';
 
-export default async function getLeagueTeams() {
+export default async function getteamObjects(headless = true) {
 
   try {
     
-  const browser = await puppeteer.launch({headless: false, defaultViewport: { width: 1280, height: 800 }});
+  const browser = await puppeteer.launch({headless, defaultViewport: { width: 1280, height: 800 }});
   const page = await browser.newPage();
   await page.goto(process.env.LEAGUE_OF_LEGENDS_GET_TEAMS_BASE_URL);
 
@@ -13,7 +13,7 @@ export default async function getLeagueTeams() {
   const leagueElements = await page.$$('li.league');
   const numLeagueElements = leagueElements.length;
 
-  const leagueTeams = [];
+  const teamObjects = [];
   let currentLeagueIndex = 0;
 
  
@@ -61,7 +61,7 @@ export default async function getLeagueTeams() {
         const splitTeamInnerText = currentTeamInnerText.split('\n');
         const teamName = splitTeamInnerText[1];
         const teamLogo = await page.evaluate(currentTeamElement => currentTeamElement.children[1].children[0].children[0].getAttribute('src'), currentTeamElement);
-        leagueTeams.push({
+        teamObjects.push({
           teamId: teamId.replace('/teams/', ''),
           teamLogo,
           teamName,
@@ -73,17 +73,11 @@ export default async function getLeagueTeams() {
 
       // increment currentLeagueIndex
       currentLeagueIndex = currentLeagueIndex + 1;
-
-      // leagueTeams.push({
-      //   teamRegion,
-      //   leagueRegion,
-      //   teamObjects,
-      // });
   }
     await browser.close();
-    console.log(JSON.stringify(leagueTeams, null, 2));
+    console.log(JSON.stringify(teamObjects, null, 2));
 
-  return leagueTeams;
+  return teamObjects;
   } catch (error) {
     console.log('Error in league-of-legends-get-teams scrape: ', error)
   }

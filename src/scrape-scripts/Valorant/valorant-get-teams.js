@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import puppeteer from 'puppeteer';
 
-export default async function getValorantTeams() {
+export default async function getValorantTeams(headless = true) {
   try {
-    const browser = await puppeteer.launch({headless: false, defaultViewport: { width: 1280, height: 800 }});
+    const browser = await puppeteer.launch({headless, defaultViewport: { width: 1280, height: 800 }});
     const page = await browser.newPage();
     await page.goto(process.env.VALORANT_GET_TEAMS_BASE_URL);
 
@@ -14,6 +14,7 @@ export default async function getValorantTeams() {
     const teamObjects = [];
     let currentTeamIndex = 0;
 
+    // todo: get more than just the top 10 teams from each region?
     while (currentTeamIndex < numTeams - 1) {
       const currentTeamElement = teamElements[currentTeamIndex];
       const teamId = await page.evaluate(currentTeamElement => currentTeamElement.getAttribute('href'), currentTeamElement);
@@ -37,6 +38,6 @@ export default async function getValorantTeams() {
     // console.log(JSON.stringify(teamObjects, null, 2));
     return teamObjects;
   } catch (error) {
-    console.log('Error in valorants-get-teams scrape: ', error)
+    console.log('Error in valorant-get-teams scrape: ', error)
   }
 }

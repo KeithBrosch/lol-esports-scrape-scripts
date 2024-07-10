@@ -62,7 +62,7 @@ export default async function getLeagueTeams() {
         const teamName = splitTeamInnerText[1];
         const teamLogo = await page.evaluate(currentTeamElement => currentTeamElement.children[1].children[0].children[0].getAttribute('src'), currentTeamElement);
         leagueTeams.push({
-          teamId,
+          teamId: teamId.replace('/teams/', ''),
           teamLogo,
           teamName,
           teamRegion,
